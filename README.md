@@ -1,2 +1,2 @@
 # team-2_project2
-This data set is to analyze the correlationships between students physical fitness and their test performances. 
+Team2 is on the journey of finding the patterns and correlationships between physical fitness and student's poverty data 
