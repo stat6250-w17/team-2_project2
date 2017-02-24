@@ -3,20 +3,11 @@
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
 
-*
-This file uses the following analytic dataset to address several research
-questions regarding college-preparation trends at CA public K-12 schools
-Dataset Name: cde_2014_analytic_file created in external file
-STAT6250-01_w17-team-0_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
-See included file for dataset properties
-;
-
 * environmental setup;
-%let dataPrepFileName = STAT6250-01_w17-team-0_project2_data_preparation.sas;
-%let sasUEFilePrefix = team-0_project2;
+%let dataPrepFileName = STAT6250-01_w17-team-2_project2_data_preparation.sas;
+%let sasUEFilePrefix = team-2_project2;
 
-* load external file that generates analytic dataset cde_2014_analytic_file
+* load external file that generates analytic dataset frpm_analytic_file
 using a system path dependent on the host operating system, after setting the
 relative file import path to the current directory, if using Windows;
 %macro setup;
