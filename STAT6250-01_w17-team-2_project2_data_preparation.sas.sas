@@ -127,7 +127,126 @@
 *=========== code for setting analytic datasets for YW's research questions =============;
 
 * setup environmental parameters;
+
 %let inputDataset1URL =
+https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_ResearchFile(AlamedaContraCosta).xlsx?raw=true
+;
+
+%let inputDataset1Type = XLS;
+%let inputDataset1DSN = pft1415_raw;
+
+%let inputDataset2URL =
+https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_Subgroups.xlsx?raw=true
+;
+
+%let inputDataset2Type = XLS;
+%let inputDataset2DSN = pft1415_subgroups_raw;
+
+%let inputDataset3URL =
+https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_Entities.xlsx?raw=true
+;
+
+%let inputDataset3Type = XLS;
+%let inputDataset3DSN = pft1516_entities_raw;
+
+%let inputDataset4URL =
+https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_ResearchFile(AlamedaContraCosta).xlsx?raw=true
+;
+
+%let inputDataset4Type = XLS;
+%let inputDataset4DSN = pft1516_raw;
+
+%let inputDataset5URL =
+https://github.com/stat6250/team-2_project2/blob/master/data/frpm1415.xlsx?raw=true
+;
+
+%let inputDataset5Type = XLS;
+%let inputDataset5DSN = frpm1415_raw;
+
+%let inputDataset6URL =
+https://github.com/stat6250/team-2_project2/blob/master/data/frpm1516.xlsx?raw=true
+;
+
+%let inputDataset6Type = XLS;
+%let inputDataset6DSN = frpm1516_raw;
+
+*load raw datasets over the wire;
+%macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
+    %put &=dsn;
+    %put &=url;
+    %put &=filetype;
+    %if
+        %sysfunc(exist(&dsn.)) = 0
+    %then
+        %do;
+            %put Loading dataset &dsn. over the wire now...;
+            filename tempfile TEMP;
+            proc http
+                method="get"
+                url="&url."
+                out=tempfile
+                ;
+            run;
+            proc import
+                file=tempfile
+                out=&dsn.
+                dbms=&filetype.;
+            run;
+            filename tempfile clear;
+        %end;
+    %else
+        %do;
+            %put Dataset &dsn. already exists. Please delete and try again.;
+        %end;
+%mend;
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset1DSN.,
+    &inputDataset1URL.,
+    &inputDataset1Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset2DSN.,
+    &inputDataset2URL.,
+    &inputDataset2Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset3DSN.,
+    &inputDataset3URL.,
+    &inputDataset3Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset4DSN.,
+    &inputDataset4URL.,
+    &inputDataset4Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset5DSN.,
+    &inputDataset5URL.,
+    &inputDataset5Type.
+)
+%loadDataIfNotAlreadyAvailable(
+    &inputDataset6DSN.,
+    &inputDataset6URL.,
+    &inputDataset6Type.
+)
+
+* Appending files pft1415_raw and pft1516_raw;
+
+PROC append base = pft1415_raw data = pft1516_raw;
+run;
+
+* Merging files pft1516_raw and frpm1516_raw;
+
+Data merged 
+	merge pft1415_raw (rename = (SCHL = School Code))
+		  frpm1415_raw;
+	by School Code;
+run;
+
+Proc print data = merged;
+run;
+
+
 
 
 
