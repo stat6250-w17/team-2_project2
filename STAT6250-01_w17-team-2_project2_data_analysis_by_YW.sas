@@ -28,7 +28,7 @@ relative file import path to the current directory, if using Windows;
             X
             "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
             ;           
-            %include ".\&STAT6250-01_w17-team-2_project2_data_preparation.sas.";
+            %include ".\&dataPrepFileName.";
         %end;
     %else
         %do;
