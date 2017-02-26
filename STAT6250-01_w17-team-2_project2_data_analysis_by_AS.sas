@@ -59,6 +59,10 @@ title2
 *Note: This will avg columns Perc5a,Perc5b,Perc5c, Perc7a,Perc7b,Perc7c,Perc9a,Perc9b,Perc9c for all the schools. 
 			     Use Report_Number = 0 ;
 
+proc means data=AS_PFT_analytic_datasetFINAL maxdec=2;
+     where report_number = 0;
+    var Perc5a Perc5b Perc5c Perc7a Perc7b Perc7c Perc9a Perc9b Perc9c
+;
 
 
 
@@ -84,4 +88,6 @@ title2
 *Methodology: Use report_number = 16 which is an economic summary report. 
               Report for each district to facilitate comparison.
 ;
+
+
 
