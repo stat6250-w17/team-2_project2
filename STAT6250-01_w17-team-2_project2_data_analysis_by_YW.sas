@@ -28,7 +28,7 @@ relative file import path to the current directory, if using Windows;
             X
             "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
             ;           
-            %include ".\&STAT6250-01_w17-team-2_project2_data_preparation.sas.";
+            %include ".\&dataPrepFileName.";
         %end;
     %else
         %do;
@@ -52,9 +52,9 @@ Note: This compares the average value of column Perc5c, Perc7c, and Perc9c.and c
 Methodology: Proc print is used to display mean for different columns 
 ;
 
-proc print data=cde_2014_analytic_file_frpm_sort(obs=5);
-    id School_Name;
-    var frpm_rate_change_2014_to_2015;
+proc means data = pft_combined_raw;
+		   class perc5c perc7c perc9c;
+	       var perc5c perc7c perc9c;
 run;
 
 
@@ -73,6 +73,17 @@ Note: This is to compare the results of the means of percentage FRPM between yea
 Methodology: Proc print is used to display mean for different columns 
 ;
 
+proc format;
+	value var22_fmt
+		var22="Eligible Percent FRPM"
+		;
+proc means data = prpm_combined_raw;
+		   class var22;
+	       var var22;
+		   format var22_fmt;
+	
+run;
+
 
 *******************************************************************************;
 * Research Question Analysis Starting Point Question 3;
@@ -86,3 +97,17 @@ Rationale: This should help identify poverty level change for students in CA K-1
 
 Methodology: Proc print is used to display mean for different columns 
 ;
+
+proc means data = pft_combined_raw;
+				class perc5c perc7c perc9c report_number;
+				where report_number = 3
+					  report_number = 4
+					  report_number = 5
+					  report_number = 6
+					  report_number = 7
+					  report_number = 8
+					  report_number = 9
+					  report_number = 10
+					  ;
+				var perc5c perc7c perc9c;
+run;

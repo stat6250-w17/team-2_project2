@@ -245,17 +245,6 @@ Data frpm_combined_raw;
 		;
 run;
 
-* Merging files pft1516_raw and frpm1516_raw;
-
-Data merged; 
-	merge pft1415_raw (rename = (SCHL = School_Code))
-		  frpm1415_raw
-		  ;
-	by School_Code;
-run;
-
-Proc print data = merged;
-run;
 
 
 
