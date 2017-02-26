@@ -129,45 +129,45 @@
 * setup environmental parameters;
 
 %let inputDataset1URL =
-https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_ResearchFile(AlamedaContraCosta).xlsx?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_ResearchFile(AlamedaContraCosta).xls?raw=true
 ;
 
-%let inputDataset1Type = XLSX;
+%let inputDataset1Type = XLS;
 %let inputDataset1DSN = pft1415_raw;
 
 %let inputDataset2URL =
-https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_Subgroups.xlsx?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_Subgroups.xls?raw=true
 ;
 
-%let inputDataset2Type = XLSX;
+%let inputDataset2Type = XLS;
 %let inputDataset2DSN = pft1415_subgroups_raw;
 
 %let inputDataset3URL =
-https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_Entities.xlsx?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_Entities.xls?raw=true
 ;
 
-%let inputDataset3Type = XLSX;
+%let inputDataset3Type = XLS;
 %let inputDataset3DSN = pft1516_entities_raw;
 
 %let inputDataset4URL =
-https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_ResearchFile(AlamedaContraCosta).xlsx?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_ResearchFile(AlamedaContraCosta).xls?raw=true
 ;
 
-%let inputDataset4Type = XLSX;
+%let inputDataset4Type = XLS;
 %let inputDataset4DSN = pft1516_raw;
 
 %let inputDataset5URL =
-https://github.com/stat6250/team-2_project2/blob/master/data/frpm1415.xlsx?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/data/frpm1415.xls?raw=true
 ;
 
-%let inputDataset5Type = XLSX;
+%let inputDataset5Type = XLS;
 %let inputDataset5DSN = frpm1415_raw;
 
 %let inputDataset6URL =
-https://github.com/stat6250/team-2_project2/blob/master/data/frpm1516.xlsx?raw=true
+https://github.com/stat6250/team-2_project2/blob/master/data/frpm1516.xls?raw=true
 ;
 
-%let inputDataset6Type = XLSX;
+%let inputDataset6Type = XLS;
 %let inputDataset6DSN = frpm1516_raw;
 
 *load raw datasets over the wire;
@@ -229,18 +229,29 @@ https://github.com/stat6250/team-2_project2/blob/master/data/frpm1516.xlsx?raw=t
     &inputDataset6URL.,
     &inputDataset6Type.
 )
+* Concatenating files pft1415_raw and pft1516_raw;
 
-* Appending files pft1415_raw and pft1516_raw;
+Data pft_combined_raw;
+	set
+		pft1415_raw 
+		pft1516_raw
+		;
+run;
 
-PROC append base = pft1415_raw data = pft1516_raw;
+Data frpm_combined_raw;
+	set 
+		frpm1415_raw
+		frpm1516_raw
+		;
 run;
 
 * Merging files pft1516_raw and frpm1516_raw;
 
-Data merged 
-	merge pft1415_raw (rename = (SCHL = School Code))
-		  frpm1415_raw;
-	by School Code;
+Data merged; 
+	merge pft1415_raw (rename = (SCHL = School_Code))
+		  frpm1415_raw
+		  ;
+	by School_Code;
 run;
 
 Proc print data = merged;

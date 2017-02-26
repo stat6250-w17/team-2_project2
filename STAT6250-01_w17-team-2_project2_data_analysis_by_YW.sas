@@ -4,8 +4,9 @@
 *******************************************************************************;
 
 *
-This file uses the following analytic dataset to address several research
-questions regarding college-preparation trends at CA public K-12 schools
+This file uses the following analytic datasets to address several research
+questions regarding physical fitness level at CA public K-12 schools
+
 Dataset Name: cde_2014_analytic_file created in external file
 STAT6250-01_w17-team-0_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
@@ -13,8 +14,8 @@ See included file for dataset properties
 ;
 
 * environmental setup;
-%let dataPrepFileName = STAT6250-01_w17-team-0_project2_data_preparation.sas;
-%let sasUEFilePrefix = team-0_project2;
+%let dataPrepFileName = STAT6250-01_w17-team-2_project2_data_preparation.sas;
+%let sasUEFilePrefix = YW_team-2_project2;
 
 * load external file that generates analytic dataset cde_2014_analytic_file
 using a system path dependent on the host operating system, after setting the
@@ -27,7 +28,7 @@ relative file import path to the current directory, if using Windows;
             X
             "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
             ;           
-            %include ".\&dataPrepFileName.";
+            %include ".\&STAT6250-01_w17-team-2_project2_data_preparation.sas.";
         %end;
     %else
         %do;
@@ -37,35 +38,18 @@ relative file import path to the current directory, if using Windows;
 %setup
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question Analysis Starting Point Question 1;
 *******************************************************************************;
 
-title1
-"Research Question: 
-;
-
-title2
-"Rationale: This should help identify schoos to consider for new outreach based upon increasing child-poverty levels."
-;
-
-footnote1
-"All five schools listed appear to have experienced extremely large increases percent eligible for free/reduced-price meals between AY2014-15 and AY2015-16."
-;
-
-footnote2
-"Given the magnitude of these changes, further investigation should be performed to ensure no data errors are involved, especially for the school apparently exhibiting an increase of 100%."
-;
-
-footnote3
-"However, assuming there are no data issues underlying this analysis, possible explanations for such large increases include changing CA demographics and recent loosening of the rules under which students qualify for free/reduced-price meals."
-;
-
 *
-Note: This compares the column "Percent (%) Eligible Free (K-12)" from frpm1415
-to the column of the same name from frpm1516.
-Methodology: Proc print is used to display the first five rows of a dataset
-that was sorted by frpm_rate_change_2014_to_2015 in descending order in the
-data-prep file.
+Research Question 1: 
+What is the fitness level change from year 2014 to year 2015 and from year 2015 to year 2016? Specifically, which among grade 5, grade 6, and grade 7, which grade of students have the better fitness level? 
+
+Rationale: This should help identify trend of fitness for students in CA K-12 publich schools.So that we can consider for if there is a need for increasing students physical fitness levels.
+
+Note: This compares the average value of column Perc5c, Perc7c, and Perc9c.and compare the results of the means between year 2014-2015 and year 2015-2016.
+
+Methodology: Proc print is used to display mean for different columns 
 ;
 
 proc print data=cde_2014_analytic_file_frpm_sort(obs=5);
@@ -73,6 +57,32 @@ proc print data=cde_2014_analytic_file_frpm_sort(obs=5);
     var frpm_rate_change_2014_to_2015;
 run;
 
-title;
-footnote;
 
+*******************************************************************************;
+* Research Question Analysis Starting Point Question 2;
+*******************************************************************************;
+
+*
+Research Question 2: 
+What is the change of rate for FRPM for K-12 publich school students from year 2014 to year 2015 and from year 2015 to year 2016? 
+
+Rationale: This should help identify poverty level change for students in CA K-12 publich schools.So that we know if there is a correlationship between poverty and student fitness level. 
+
+Note: This is to compare the results of the means of percentage FRPM between year 2014-2015 and year 2015-2016.
+
+Methodology: Proc print is used to display mean for different columns 
+;
+
+
+*******************************************************************************;
+* Research Question Analysis Starting Point Question 3;
+*******************************************************************************;
+
+*
+Research Question 3: 
+What is correlationship between student's ethnicity and their physical fitness level?  
+
+Rationale: This should help identify poverty level change for students in CA K-12 publich schools.So that we know if there is a correlationship between poverty and student fitness level. 
+
+Methodology: Proc print is used to display mean for different columns 
+;
