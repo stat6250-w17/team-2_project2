@@ -4,13 +4,14 @@
 *******************************************************************************;
 
 *
-This file uses the AS_PFT_analytic_datasetFINAL analytic dataset to address several 
-research questions regarding Physical Fitness level of students in Alameda and 
-Contra Costa school districts 
-Dataset Name: AS_PFT_analytic_datasetFINAL created in external file
-STAT6250-01_w17-team-2_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
-See included file for dataset properties
+This file uses the PFT_analytic_dataset to address several research questions 
+regarding Physical Fitness level of students in Alameda and Contra Costa school 
+districts 
+
+Dataset Name: PFT_analytic_dataset created in external file
+              STAT6250-01_w17-team-2_project2_data_preparation.sas, which is 
+              assumed to be in the same directory as this file
+	      See included file for dataset properties.
 ;
 
 
@@ -19,7 +20,8 @@ See included file for dataset properties
 %let dataPrepFileName = STAT6250-01_w17-team-2_project2_data_preparation.sas;
 %let sasUEFilePrefix = team-2_project2;
 
-* load external file that generates analytic dataset AS_PFT_analytic_datasetFINAL
+
+* load external file that generates analytic dataset PFT_analytic_dataset
 using a system path dependent on the host operating system, after setting the
 relative file import path to the current directory, if using Windows;
 %macro setup;
@@ -59,9 +61,9 @@ title2
 *Note: This will avg columns Perc5a,Perc5b,Perc5c, Perc7a,Perc7b,Perc7c,Perc9a,Perc9b,Perc9c for all the schools. 
 			     Use Report_Number = 0 ;
 
-proc means data=AS_PFT_analytic_datasetFINAL maxdec=2;
+proc means data=PFT_analytic_dataset maxdec=2;
      where report_number = 0;
-    var Perc5a Perc5b Perc5c Perc7a Perc7b Perc7c Perc9a Perc9b Perc9c
+           var Perc5a Perc5b Perc5c Perc7a Perc7b Perc7c Perc9a Perc9b Perc9c
 ;
 
 
@@ -78,6 +80,11 @@ title2
               Report for each district to facilitate comparison.;
 
 
+proc means data=PFT_analytic_dataset maxdec=2;
+     where report_number = 14;
+           by ccode dcode
+;
+
 
 title1
 "Research Question 3: Compare the results of the PFT for the above mentioned test areas based on economic status across districts for years 2014-2015 
@@ -91,3 +98,12 @@ title2
 
 
 
+proc means data=PFT_analytic_dataset maxdec=2;
+     where report_number = 16;
+       by  ccode dcode
+;
+
+
+quit;
+
+*===========================================================================;
