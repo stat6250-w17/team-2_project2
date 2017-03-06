@@ -59,7 +59,7 @@ title2
 				Grade 5,7 and 9 students who are tested are categorized as healthy(PercNa), needs improvement(PercNb) and high risk(PercNc).
                                 PE programs can be fine tuned if this analysis reveals that students consistently perform below average in any one of these
                                 areas.';
-*Note: This will avg columns Perc5a,Perc5b,Perc5c, Perc7a,Perc7b,Perc7c,Perc9a,Perc9b,Perc9c for all the schools. 
+*Methodology: This will avg columns Perc5a,Perc5b,Perc5c, Perc7a,Perc7b,Perc7c,Perc9a,Perc9b,Perc9c for all the schools. 
 			     Use Report_Number = 0 ;
 
 proc sql;
@@ -82,6 +82,19 @@ proc sql;
          order by ccode, dcode, level_number, report_number, table_number, line_text
 ;
 ;
+
+*-----------------------------------------------------------------------------;
+footnote
+"The comparison of reveals the districts that have better scores in each area. Based on these results,
+ successful districts can share strategies that are helping their fitness goals in each area."
+;
+
+/*reset title and footnote*/
+title;
+footnote;
+
+*-----------------------------------------------------------------------------;
+
 
 
 title1
@@ -115,6 +128,21 @@ proc sql;
 ;
 
 
+
+*-----------------------------------------------------------------------------;
+footnote
+"The difference, if any, between boys and girls PFT scores reaveals the need to refine the PE curriculum to
+ reduce the gap. This deficit may be a trend across districts or might be an issue at some specific districts."
+;
+
+/*reset title and footnote*/
+title;
+footnote;
+
+*-----------------------------------------------------------------------------;
+
+
+
 title1
 'Research Question 3: Compare the results of the PFT for the above mentioned test areas based on economic status 
                       across districts for years 2014-2015 
@@ -146,6 +174,19 @@ proc sql;
          group by ccode, dcode, level_number, report_number, table_number, line_text
          order by ccode, dcode, level_number, report_number, table_number, line_text
 ;
+
+*-----------------------------------------------------------------------------;
+footnote
+"The economic status might reveal a strong correlation to physical fitness. Observe if results 
+ are similar across districts.It may require a deeper study and use of supporting data to 
+ identify causes."
+;
+
+/*reset title and footnote*/
+title;
+footnote;
+*-----------------------------------------------------------------------------;
+
 
 quit;
 
