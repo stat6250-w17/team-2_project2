@@ -61,8 +61,8 @@ Note: This compares the average value of column Perc5c, Perc7c, and Perc9c and c
 
 *Methodology: Use Proc means procedure and identify the variables to compare the values;
 
-PROC MEANS DATA = PFT_ANALYTIC_DATASET MEAN MAXDEC = 2;
-	VAR Perc5c Perc7c Perc9c VAR22;
+PROC MEANS DATA = PFT_ANALYTIC_DATASET (RENAME = (perc5c = percent_G5_highrisk perc7c = percent_G7_highrisk perc9c = percent_G9_highrisk VAR22 = percent_eligible_frpm))MEAN MAXDEC = 2;
+	VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk percent_eligible_frpm;
 	LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
 		  Perc7c = 'percentage of Grade 7 students in high risk zone'
 		  Perc9c = 'percentage of Grade 9 students in high risk zone'
@@ -71,7 +71,6 @@ RUN;
 
 title;
 footnote;
-
 
 *******************************************************************************;
 * Research Question Analysis Starting Point Question 2;
@@ -93,9 +92,9 @@ footnote2
 "From the resutls we can see district 76653 grade 5 and grade 7 students have 0% in the health risk zone but their grade 9 students have about 90%. Further research need to be made for this result to see why this is the case."
 ;
 
-PROC MEANS DATA = PFT14_16 MEAN MAXDEC = 2;
+PROC MEANS DATA = PFT14_16 (RENAME = (perc5c = percent_G5_highrisk perc7c = percent_G7_highrisk perc9c = percent_G9_highrisk)) MEAN MAXDEC = 2;
 	CLASS DCODE;
-	VAR perc5c perc7c perc9c;
+	VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk;
 	LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
 		  Perc7c = 'percentage of Grade 7 students in high risk zone'
 		  Perc9c = 'percentage of Grade 9 students in high risk zone'
@@ -163,6 +162,19 @@ footnote2
 *
 Methodology: Use Proc means procedure and identify the variables to compare the values
 ;
+PROC FORMAT;
+VALUE Report_Number_Format
+3 = 'African Americans' 
+4 = 'American Indian'
+5 = 'Asians'
+6 = 'Filipino'
+7 = 'Hispanic'
+8 = 'Native Hawaiian'
+9 = 'White'
+10 = 'Two or more races'
+;
+
+Run; 
 
 PROC MEANS DATA = pft14_16 mean maxdec=2;
 		CLASS Report_Number; 
@@ -172,7 +184,13 @@ PROC MEANS DATA = pft14_16 mean maxdec=2;
 		  Perc7c = 'percentage of Grade 7 students in high risk zone'
 		  Perc9c = 'percentage of Grade 9 students in high risk zone'
 		  ;
+		FORMAT Report_Number Report_Number_Format.;
 RUN;
+
+
+
+
+
 
 
 
