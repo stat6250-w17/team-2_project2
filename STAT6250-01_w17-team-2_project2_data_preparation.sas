@@ -100,9 +100,6 @@ Creates analytic dataset : PFT_analytic_dataset
 
 --
 
-
---
-
 [Dataset 5 Name] FRPM_14_15
 
 [Dataset Description] an unduplicated count of students who are FRPM eligible. This count includes:
@@ -151,14 +148,14 @@ Import each of the 6 xls files into a SAS dataset
 
 filename PFT14_15 "%sysfunc(getoption(work))/PFT14_15.xls";
 
-PROC HTTP
+proc http
     method="get" 
     url="https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_ResearchFile(AlamedaContraCosta).xls?raw=true"    
     out=PFT14_15
     ;
 run;
 
-PROC IMPORT FILE=PFT14_15
+proc import FILE=PFT14_15
 	OUT= WORK.PFT14_15
 	DBMS=xls
 	REPLACE;
@@ -172,14 +169,14 @@ RUN;
 
 filename PFT15_16 "%sysfunc(getoption(work))/PFT15_16.xls";
 
-PROC HTTP
+proc http
     method="get" 
     url="https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_ResearchFile(AlamedaContraCosta).xls?raw=true"    
     out=PFT15_16
     ;
 run;
 
-PROC IMPORT FILE=PFT15_16
+proc import FILE=PFT15_16
 	OUT= WORK.PFT15_16
 	DBMS=xls
 	REPLACE;
@@ -191,7 +188,7 @@ RUN;
 /* Import 2015_16_Entities.xls */
 filename Ent15_16 "%sysfunc(getoption(work))/Entities.xls"; 
 
-PROC HTTP
+proc http
     method="get" 
     url="https://github.com/stat6250/team-2_project2/blob/master/data/2015_16_Entities.xls?raw=true"    
     out=Ent15_16
@@ -199,7 +196,7 @@ PROC HTTP
 run;
 
 
-PROC IMPORT FILE=Ent15_16
+proc import FILE=Ent15_16
 	OUT= WORK.Entities_2015_16
 	DBMS=xls
 	REPLACE;
@@ -211,14 +208,14 @@ RUN;
 /* Import 2014_15_Subgroups.xls */
 filename Sub14_15 "%sysfunc(getoption(work))/Subgroups.xls";
 
-PROC HTTP
+proc http
     method="get" 
     url="https://github.com/stat6250/team-2_project2/blob/master/data/2014_15_Subgroups.xls?raw=true"    
     out=Sub14_15
     ;
 run;
 
-PROC IMPORT FILE=Sub14_15
+proc import FILE=Sub14_15
 	OUT= WORK.Subgroup_2014_15
 	DBMS=xls
 	REPLACE;
@@ -230,14 +227,14 @@ RUN;
 /* Import frpm1415.xls */
 filename FRP14_15 "%sysfunc(getoption(work))/FRPM1415.xls";
 
-PROC HTTP
+proc http
     method="get" 
     url="https://github.com/stat6250/team-2_project2/blob/master/data/frpm1415.xls?raw=true"    
     out=FRP14_15
     ;
 run;
 
-PROC IMPORT FILE=FRP14_15
+proc import FILE=FRP14_15
 	OUT= WORK.FRP14_15
 	DBMS=xls
 	REPLACE;
@@ -250,14 +247,14 @@ RUN;
 /* Import frpm1516.xls */
 filename FRP15_16 "%sysfunc(getoption(work))/FRPM1516.xls";
 
-PROC HTTP
+proc http
     method="get" 
     url="https://github.com/stat6250/team-2_project2/blob/master/data/frpm1516.xls?raw=true"    
     out=FRP15_16
     ;
 run;
 
-PROC IMPORT FILE=FRP15_16
+proc import FILE=FRP15_16
 	OUT= WORK.FRP15_16
 	DBMS=xls
 	REPLACE;
@@ -265,7 +262,7 @@ PROC IMPORT FILE=FRP15_16
 ;
 RUN;
 *====================================================================
-End of IMPORT of xls
+End of import of xls
 =====================================================================;
 
 
@@ -278,14 +275,14 @@ Sort and combine datasets vertically
 ==============================================================================;
 
 /*Combine the PFT 2014-15 and 2015-16 data into a single PFT14_16 dataset */
-DATA PFT14_16;
+data PFT14_16;
      set PFT14_15(IN=in1415 RENAME=(CO=ccode DIST=dcode SCHL=scode) )/* Change the names of county code, district code and school code columns */
          PFT15_16(IN=in1516 RENAME=(CO=ccode DIST=dcode SCHL=scode) )/* so they are uniform in all datasets                                    */ 
 
 ;
 
 /*Combine the FRPM 2014-15 and 2015-16 data into a single FRP14_16 dataset */
-DATA FRP14_16;
+data FRP14_16;
 	set FRP14_15(IN=in1415 )
             FRP15_16(IN=in1516 );
     /* Change datatype of county, district and school code 
@@ -303,16 +300,16 @@ DATA FRP14_16;
    Prior to one-to-many merge, sort the PFT dataset and Entities dataset
    by the CountyCode + DistrictCode + SchoolCode which defines each 'Entity'*/
 
-PROC SORT data=PFT14_16;
+proc sort data=PFT14_16;
      by ccode dcode scode
 ;
 
-PROC SORT data = Entities_2015_16;
+proc sort data = Entities_2015_16;
      by ccode dcode scode
 ;
 
 /* Combine the datasets using merge */
-DATA PFT_analytic_dataset1; /*temp dataset to hold PFT + Entities data*/    
+data PFT_analytic_dataset1; /*temp dataset to hold PFT + Entities data*/    
      merge PFT14_16 Entities_2015_16(drop=ChrtNum);
      by ccode dcode scode;
 
@@ -321,17 +318,17 @@ DATA PFT_analytic_dataset1; /*temp dataset to hold PFT + Entities data*/
    Prior to one-to-many merge, sort the PFT+Entities dataset and Subgroups dataset
    by the CountyCode + DistrictCode + SchoolCode which defines each 'Entity'*/
 
-PROC SORT data=PFT_analytic_dataset1;
+proc sort data=PFT_analytic_dataset1;
 	by Level_Number Report_Number Table_Number Line_Number
 ;
 
-PROC SORT data = Subgroup_2014_15;
+proc sort data = Subgroup_2014_15;
      by Level_Number Report_Number Table_Number Line_Number
 ;
 
 
 /* Combine the datasets using merge */
-DATA PFT_analytic_dataset2;
+data PFT_analytic_dataset2;
      merge PFT_analytic_dataset1 Subgroup_2014_15;
      by Level_Number Report_Number Table_Number Line_Number;
 
@@ -343,22 +340,22 @@ DATA PFT_analytic_dataset2;
    by the CountyCode + DistrictCode + SchoolCode which defines each 'Entity'*/
 
 
-PROC SORT data =PFT_analytic_dataset2;
+proc sort data =PFT_analytic_dataset2;
      by ccode dcode scode;
 ;
 
 
-PROC SORT data =FRP14_16;
+proc sort data =FRP14_16;
      by ccode dcode scode;
 ;
 
 
-DATA PFT_analytic_dataset;
+data PFT_analytic_dataset;
      merge PFT_analytic_dataset2 FRP14_16;
      by ccode dcode scode;
 
 
-PROC SORT
+proc sort
         nodupkey
         data=PFT_analytic_dataset
         out=_null_
@@ -368,8 +365,7 @@ PROC SORT
 
 run;
 
-QUIT;
+quit;
 
 *===========================================================================;
-
 
