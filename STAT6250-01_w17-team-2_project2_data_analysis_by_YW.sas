@@ -14,27 +14,10 @@ See included file for dataset properties
 ;
 
 * environmental setup;
-%let dataPrepFileName = STAT6250-01_w17-team-2_project2_data_preparation.sas;
-%let sasUEFilePrefix = team-2_project2;
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))";
 
-* load external files using a system path dependent on the host operating system, after setting the
-relative file import path to the current directory, if using Windows;
-%macro setup;
-    %if
-        &SYSSCP. = WIN
-    %then
-        %do;
-            X
-            "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
-            ;           
-            %include ".\&dataPrepFileName.";
-        %end;
-    %else
-        %do;
-            %include "~/&sasUEFilePrefix./&dataPrepFileName.";
-        %end;
-%mend;
-%setup
+%include '.\STAT6250-01_w17-team-2_project2_data_preparation.sas';
+
 
 *******************************************************************************;
 * Research Question Analysis Starting Point Question 1;

@@ -26,7 +26,7 @@ Creates analytic dataset : PFT_analytic_dataset
 
 [Data Source] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp
 
-[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles15.zip file; 
+[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles15.zip file 
                   PFT Research File Layouts 2015.PDF contains data dictionary
 
 [Unique ID Schema] The columns "Level_Number", "Report_Number", "Table_Number", "Line_Number","County Code",
@@ -50,7 +50,7 @@ Creates analytic dataset : PFT_analytic_dataset
 
 [Data Source] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp
 
-[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles16.zip file; 
+[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles16.zip file 
                   PFT Research File Layouts 2016.PDF contains data dictionary
 
 [Unique ID Schema] The columns "Level_Number", "Report_Number", "Table_Number", "Line_Number","County Code",
@@ -71,7 +71,7 @@ Creates analytic dataset : PFT_analytic_dataset
 
 [Data Source] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp
 
-[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles16.zip file; 
+[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles16.zip file 
                   PFT Research File Layouts 2015.PDF contains data dictionary
 
 [Unique ID Schema] The CCCode + Dcode + Scode is combined to form the CDS_Code, 
@@ -92,7 +92,7 @@ Creates analytic dataset : PFT_analytic_dataset
 
 [Data Source] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp
 
-[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles16.zip file; 
+[Data Dictionary] http://www.cde.ca.gov/ta/tg/pf/pftresearch.asp - Download PFTResearchFiles16.zip file 
                   PFT Research File Layouts 2015.PDF contains data dictionary
 
 [Unique ID Schema] The column (Level_Number+Report_Number+Table_Number+Line_Number) form the primary key
@@ -103,7 +103,7 @@ Creates analytic dataset : PFT_analytic_dataset
 [Dataset 5 Name] FRPM_14_15
 
 [Dataset Description] an unduplicated count of students who are FRPM eligible. This count includes:
-			- Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools; and
+			- Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools and
 			- Students who are automatically eligible for free meals based on their foster, migrant, or homeless status, or because they were "directly certified" as being eligible for free meals based on their participation in California's food stamp program.
 
 [Experimental Unit Description] an unduplicated count of students who are FRPM eligible per school
@@ -124,7 +124,7 @@ Creates analytic dataset : PFT_analytic_dataset
 [Dataset 6 Name] FRPM_15_16
 
 [Dataset Description] an unduplicated count of students who are FRPM eligible. This count includes:
-			- Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools; and
+			- Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools and
 			- Students who are automatically eligible for free meals based on their foster, migrant, or homeless status, or because they were "directly certified" as being eligible for free meals based on their participation in California's food stamp program.
 
 [Experimental Unit Description] an unduplicated count of students who are FRPM eligible per school
