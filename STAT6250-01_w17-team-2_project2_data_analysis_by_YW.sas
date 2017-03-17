@@ -7,9 +7,10 @@
 This file uses the following analytic datasets to address several research
 questions regarding physical fitness level at CA public K-12 schools
 
-Dataset Name: pft_analytic_dataset, pft14_16, and frp14_16 created in external file
-STAT6250-01_w17-team-2_project2_data_preparation.sas, which is assumed to be
-in the same directory as this file
+Dataset Name: pft_analytic_dataset, pft14_16, and frp14_16 created in external 
+file STAT6250-01_w17-team-2_project2_data_preparation.sas, which is assumed to 
+be in the same directory as this file
+
 See included file for dataset properties
 ;
 
@@ -40,17 +41,34 @@ footnote2
 ;
 
 *
-Note: This compares the average value of column Perc5c, Perc7c, and Perc9c and compare the results of the means with PFRM data.;
+Note: This compares the average value of column Perc5c, Perc7c, and Perc9c and
+compare the results of the means with PFRM data.;
 
-*Methodology: Use Proc means procedure and identify the variables to compare the values;
+*Methodology: Use Proc means procedure and identify the variables to compare the 
+values;
 
-PROC MEANS DATA = PFT_ANALYTIC_DATASET (RENAME = (perc5c = percent_G5_highrisk perc7c = percent_G7_highrisk perc9c = percent_G9_highrisk VAR22 = percent_eligible_frpm))MEAN MAXDEC = 2;
-	VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk percent_eligible_frpm;
-	LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
-		  Perc7c = 'percentage of Grade 7 students in high risk zone'
-		  Perc9c = 'percentage of Grade 9 students in high risk zone'
-		  ;
-RUN;
+proc means 
+ 		data = pft_analytic_dataset 
+		(
+			rename = 
+			(
+				perc5c = percent_G5_highrisk 
+				perc7c = percent_G7_highrisk 
+				perc9c = percent_G9_highrisk 
+				var22 = percent_eligible_frpm
+			)
+		)mean maxdec = 2
+	;
+     var percent_G5_highrisk 
+		 percent_G7_highrisk 
+		 percent_G9_highrisk 
+         percent_eligible_frpm
+     ;
+     label percent_G5_highrisk = 'percentage of Grade 5 students in high risk zone'
+           percent_G7_highrisk = 'percentage of Grade 7 students in high risk zone'
+           percent_G9_highrisk = 'percentage of Grade 9 students in high risk zone'
+     ;
+run;
 
 title;
 footnote;
@@ -75,14 +93,24 @@ footnote2
 "From the resutls we can see district 76653 grade 5 and grade 7 students have 0% in the health risk zone but their grade 9 students have about 90%. Further research need to be made for this result to see why this is the case."
 ;
 
-PROC MEANS DATA = PFT14_16 (RENAME = (perc5c = percent_G5_highrisk perc7c = percent_G7_highrisk perc9c = percent_G9_highrisk)) MEAN MAXDEC = 2;
-	CLASS DCODE;
-	VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk;
-	LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
-		  Perc7c = 'percentage of Grade 7 students in high risk zone'
-		  Perc9c = 'percentage of Grade 9 students in high risk zone'
-		  ;
-RUN;
+proc means 
+		data = pft14_16 
+		(
+			rename = 
+			(
+				perc5c = percent_G5_highrisk 
+				perc7c = percent_G7_highrisk 
+				perc9c = percent_G9_highrisk 
+			)
+		)mean maxdec = 2
+	;
+		class dcode;
+    	var percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk;
+     	label percent_G5_highrisk = 'percentage of Grade 5 students in high risk zone'
+              percent_G7_highrisk = 'percentage of Grade 7 students in high risk zone'
+              percent_G9_highrisk = 'percentage of Grade 9 students in high risk zone'
+          ;
+run;
 
 title;
 footnote;
@@ -113,12 +141,12 @@ Note: This is to compare the results of the means of percentage FRPM between yea
 
 Methodology: Use Proc means procedure and identify the variables to compare the values
 ;
-
-PROC MEANS DATA = FRP14_16 MEAN MAXDEC = 2 N MISSING;
-CLASS DISTRICT_CODE DISTRICT_NAME;
-LABEL VAR22 = ELIGIBLE FRPM PERCENTAGE; 
-VAR VAR22;
-RUN;
+*IL: be consistent with indentation;
+proc means data = frp14_16 mean maxdec = 2 n missing; 
+	 class district_code district_name; 
+	 label var22 = elegible frpm percentage;  
+ 	 var var22; 
+run;
 
 title;
 footnote;
@@ -137,50 +165,32 @@ title2
 ;
 
 footnote1
-"From the result, we can see that in general group 7, which is Hispanic, have more percent of students who are at a higher health risk.";
+"From the result, we can see that in general group 7, which is Hispanic, have more percent of students who are at a higher health risk."
+;
 
 footnote2
-"From the result, we can see that group 4, which is American Indian, in general have heathier students.";
+"From the result, we can see that group 4, which is American Indian, in general have heathier students."
+;
 
 *
 Methodology: Use Proc means procedure and identify the variables to compare the values
-;
-PROC FORMAT;
-VALUE Report_Number_Format
-3 = 'African Americans' 
-4 = 'American Indian'
-5 = 'Asians'
-6 = 'Filipino'
-7 = 'Hispanic'
-8 = 'Native Hawaiian'
-9 = 'White'
-10 = 'Two or more races'
-;
+; 
 
-Run; 
-
-PROC MEANS DATA = pft14_16 mean maxdec=2;
-		CLASS Report_Number; 
-		WHERE Report_Number in (3,4,5,6,7,8,9,10);
+proc means data = pft14_16 mean maxdec=2;
+		class Report_Number;
+		where Report_Number in (3,4,5,6,7,8,9,19);
 		var perc5c perc7c perc9c;
-		LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
-		  Perc7c = 'percentage of Grade 7 students in high risk zone'
-		  Perc9c = 'percentage of Grade 9 students in high risk zone'
-		  ;
-		FORMAT Report_Number Report_Number_Format.;
-RUN;
+		label Perc5c = 'percentage of Grade 5 students in high risk zone'
+              Perc7c = 'percentage of Grade 7 students in high risk zone'
+              Perc9c = 'percentage of Grade 9 students in high risk zone'
+          ;
+		format Report_Number Report_Number_Format.;
+run;
 
 title;
 footnote;
 
-
-
-
-
-
-
-
-
+* =============================================================================;
 
 
 
