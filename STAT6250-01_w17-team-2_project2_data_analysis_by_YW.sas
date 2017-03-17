@@ -5,16 +5,16 @@
 
 *
 This file uses the following analytic datasets to address several research
-questions regarding physical fitness level at CA public K-12 schools
+questions regarding physical fitness level at CA public K-12 schools.
 
 Dataset Name: pft_analytic_dataset, pft14_16, and frp14_16 created in external 
 file STAT6250-01_w17-team-2_project2_data_preparation.sas, which is assumed to 
-be in the same directory as this file
+be in the same directory as this file.
 
 See included file for dataset properties.
 ;
 
-* environmental setup;
+*environmental setup;
 X 
 "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
 ;
@@ -45,10 +45,13 @@ footnote2
 
 *
 Note: This compares the average value of column Perc5c, Perc7c, and Perc9c and
-compare the results of the means with PFRM data.;
+compare the results of the means with PFRM data.
+;
 
-*Methodology: Use Proc means procedure and identify the variables to compare the 
-values;
+*
+Methodology: Use Proc means procedure and identify the variables to compare the 
+values.
+;
 
 proc means 
  		data = pft_analytic_dataset 
@@ -97,6 +100,15 @@ footnote1
 
 footnote2
 "From the resutls we can see district 76653 grade 5 and grade 7 students have 0% in the health risk zone but their grade 9 students have about 90%. Further research need to be made for this result to see why this is the case."
+;
+*
+Note: This compares the average value of column Perc5c, Perc7c, and Perc9c within
+the pft14_16 data only.
+;
+
+*
+Methodology: Use Proc means procedure and identify the variables to compare the 
+values.
 ;
 
 proc means 
@@ -148,7 +160,9 @@ footnote2
 *
 Note: This is to compare the results of the means of percentage FRPM between 
 year 2014-2015 and year 2015-2016.
+;
 
+*
 Methodology: Use Proc means procedure and identify the variables to compare 
 the values.
 ;
