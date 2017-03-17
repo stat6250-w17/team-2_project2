@@ -62,6 +62,12 @@ title2
 *Methodology: This will avg columns Perc5a,Perc5b,Perc5c, Perc7a,Perc7b,Perc7c,Perc9a,Perc9b,Perc9c for all the schools. 
 			     Use Report_Number = 0 ;
 
+*-----------------------------------------------------------------------------;
+footnote
+"The comparison of reveals the districts that have better scores in each area. Based on these results,
+ successful districts can share strategies that are helping their fitness goals in each area."
+;
+
 proc sql;
 	select ccode, dcode, level_number, report_number, table_number, line_text,
                avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
@@ -83,11 +89,7 @@ proc sql;
 ;
 ;
 
-*-----------------------------------------------------------------------------;
-footnote
-"The comparison of reveals the districts that have better scores in each area. Based on these results,
- successful districts can share strategies that are helping their fitness goals in each area."
-;
+
 
 /*reset title and footnote*/
 title;
@@ -106,6 +108,12 @@ title2
  
 *Methodology: Use report_number = 14 which is a gender summary report. 
               Report for each district to facilitate comparison.;
+
+*-----------------------------------------------------------------------------;
+footnote
+"The difference, if any, between boys and girls PFT scores reaveals the need to refine the PE curriculum to
+ reduce the gap. This deficit may be a trend across districts or might be an issue at some specific districts."
+;
 
 
 proc sql;
@@ -129,12 +137,6 @@ proc sql;
 
 
 
-*-----------------------------------------------------------------------------;
-footnote
-"The difference, if any, between boys and girls PFT scores reaveals the need to refine the PE curriculum to
- reduce the gap. This deficit may be a trend across districts or might be an issue at some specific districts."
-;
-
 /*reset title and footnote*/
 title;
 footnote;
@@ -154,6 +156,12 @@ title2
               Report for each district to facilitate comparison.
 ;
 
+*-----------------------------------------------------------------------------;
+footnote
+"The economic status might reveal a strong correlation to physical fitness. Observe if results 
+ are similar across districts.It may require a deeper study and use of supporting data to 
+ identify causes."
+;
 
 
 proc sql;
@@ -175,12 +183,6 @@ proc sql;
          order by ccode, dcode, level_number, report_number, table_number, line_text
 ;
 
-*-----------------------------------------------------------------------------;
-footnote
-"The economic status might reveal a strong correlation to physical fitness. Observe if results 
- are similar across districts.It may require a deeper study and use of supporting data to 
- identify causes."
-;
 
 /*reset title and footnote*/
 title;
