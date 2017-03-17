@@ -11,13 +11,16 @@ Dataset Name: pft_analytic_dataset, pft14_16, and frp14_16 created in external
 file STAT6250-01_w17-team-2_project2_data_preparation.sas, which is assumed to 
 be in the same directory as this file
 
-See included file for dataset properties
+See included file for dataset properties.
 ;
 
 * environmental setup;
-X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))";
+X 
+"cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
+;
 
-%include '.\STAT6250-01_w17-team-2_project2_data_preparation.sas';
+%include '.\STAT6250-01_w17-team-2_project2_data_preparation.sas'
+;
 
 
 *******************************************************************************;
@@ -64,9 +67,12 @@ proc means
 		 percent_G9_highrisk 
          percent_eligible_frpm
      ;
-     label percent_G5_highrisk = 'percentage of Grade 5 students in high risk zone'
-           percent_G7_highrisk = 'percentage of Grade 7 students in high risk zone'
-           percent_G9_highrisk = 'percentage of Grade 9 students in high risk zone'
+     label percent_G5_highrisk = 
+				'percentage of Grade 5 students in high risk zone'
+           percent_G7_highrisk = 
+				'percentage of Grade 7 students in high risk zone'
+           percent_G9_highrisk = 
+				'percentage of Grade 9 students in high risk zone'
      ;
 run;
 
@@ -103,12 +109,15 @@ proc means
 				perc9c = percent_G9_highrisk 
 			)
 		)mean maxdec = 2
-	;
+	      ;
 		class dcode;
     	var percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk;
-     	label percent_G5_highrisk = 'percentage of Grade 5 students in high risk zone'
-              percent_G7_highrisk = 'percentage of Grade 7 students in high risk zone'
-              percent_G9_highrisk = 'percentage of Grade 9 students in high risk zone'
+     	label percent_G5_highrisk = 
+					'percentage of Grade 5 students in high risk zone'
+              percent_G7_highrisk = 
+					'percentage of Grade 7 students in high risk zone'
+              percent_G9_highrisk = 
+					'percentage of Grade 9 students in high risk zone'
           ;
 run;
 
@@ -137,11 +146,13 @@ footnote2
 
 
 *
-Note: This is to compare the results of the means of percentage FRPM between year 2014-2015 and year 2015-2016.
+Note: This is to compare the results of the means of percentage FRPM between 
+year 2014-2015 and year 2015-2016.
 
-Methodology: Use Proc means procedure and identify the variables to compare the values
+Methodology: Use Proc means procedure and identify the variables to compare 
+the values.
 ;
-*IL: be consistent with indentation;
+
 proc means data = frp14_16 mean maxdec = 2 n missing; 
 	 class district_code district_name; 
 	 label var22 = elegible frpm percentage;  
@@ -173,7 +184,8 @@ footnote2
 ;
 
 *
-Methodology: Use Proc means procedure and identify the variables to compare the values
+Methodology: Use Proc means procedure and identify the variables to compare 
+the values.
 ; 
 
 proc means data = pft14_16 mean maxdec=2;
