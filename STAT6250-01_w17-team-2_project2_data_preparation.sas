@@ -265,8 +265,20 @@ RUN;
 End of import of xls
 =====================================================================;
 
+/* Proc Format Statement */
+proc format;
+    value Report_Number_Format
+	    3 = 'African Americans' 
+	    4 = 'American Indian'
+	    5 = 'Asians'
+	    6 = 'Filipino'
+	    7 = 'Hispanic'
+	    8 = 'Native Hawaiian'
+	    9 = 'White'
+	    10 = 'Two or more races'
+    ;
 
-
+run;
 
 *=============================================================================
 Sort and combine datasets vertically
@@ -335,7 +347,7 @@ data PFT_analytic_dataset2;
 
 
 
-/* Next Merge or horizontally combine PFT+ENtities+Subgroups  with the FRPM dataset.
+/* Next Merge or horizontally combine PFT+ENtities+Subgroups with the FRPM dataset.
    Prior to one-to-many merge, sort the PFT+Entities+Subgroups dataset and FRPM dataset
    by the CountyCode + DistrictCode + SchoolCode which defines each 'Entity'*/
 
@@ -362,21 +374,6 @@ proc sort
     ;
     by ccode dcode scode level_number report_number table_number line_number
     ;
-
-run;
-
-/* Proc Format Statement */
-proc format;
-    value Report_Number_Format
-    3 = 'African Americans' 
-    4 = 'American Indian'
-    5 = 'Asians'
-    6 = 'Filipino'
-    7 = 'Hispanic'
-    8 = 'Native Hawaiian'
-    9 = 'White'
-    10 = 'Two or more races'
-;
 
 run;
 
