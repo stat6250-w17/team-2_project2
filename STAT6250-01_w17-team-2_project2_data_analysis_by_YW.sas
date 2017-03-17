@@ -2,7 +2,7 @@
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
-
+*IL: use white space to create paragraphs;
 *
 This file uses the following analytic datasets to address several research
 questions regarding physical fitness level at CA public K-12 schools
@@ -10,6 +10,7 @@ questions regarding physical fitness level at CA public K-12 schools
 Dataset Name: pft_analytic_dataset, pft14_16, and frp14_16 created in external file
 STAT6250-01_w17-team-2_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
@@ -38,18 +39,19 @@ footnote1
 footnote2
 "We can see that the percentage of the PFRM students are closet to grade 5 students who are in risk of physical fitness. Further study can be invested to see if there is correlations between grade 5 students and their PFRM rate."
 ;
-
+*IL: wrap code at 80 characters, except for strings;
 *
 Note: This compares the average value of column Perc5c, Perc7c, and Perc9c and compare the results of the means with PFRM data.;
 
 *Methodology: Use Proc means procedure and identify the variables to compare the values;
-
+*IL: be careful when renaming;
+*IL: be consistent with capitalization;
 PROC MEANS DATA = PFT_ANALYTIC_DATASET (RENAME = (perc5c = percent_G5_highrisk perc7c = percent_G7_highrisk perc9c = percent_G9_highrisk VAR22 = percent_eligible_frpm))MEAN MAXDEC = 2;
-	VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk percent_eligible_frpm;
-	LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
-		  Perc7c = 'percentage of Grade 7 students in high risk zone'
-		  Perc9c = 'percentage of Grade 9 students in high risk zone'
-		  ;
+    VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk percent_eligible_frpm;
+    LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
+          Perc7c = 'percentage of Grade 7 students in high risk zone'
+          Perc9c = 'percentage of Grade 9 students in high risk zone'
+          ;
 RUN;
 
 title;
@@ -76,12 +78,12 @@ footnote2
 ;
 
 PROC MEANS DATA = PFT14_16 (RENAME = (perc5c = percent_G5_highrisk perc7c = percent_G7_highrisk perc9c = percent_G9_highrisk)) MEAN MAXDEC = 2;
-	CLASS DCODE;
-	VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk;
-	LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
-		  Perc7c = 'percentage of Grade 7 students in high risk zone'
-		  Perc9c = 'percentage of Grade 9 students in high risk zone'
-		  ;
+    CLASS DCODE;
+    VAR percent_G5_highrisk percent_G7_highrisk percent_G9_highrisk;
+    LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
+          Perc7c = 'percentage of Grade 7 students in high risk zone'
+          Perc9c = 'percentage of Grade 9 students in high risk zone'
+          ;
 RUN;
 
 title;
@@ -113,7 +115,7 @@ Note: This is to compare the results of the means of percentage FRPM between yea
 
 Methodology: Use Proc means procedure and identify the variables to compare the values
 ;
-
+*IL: be consistent with indentation;
 PROC MEANS DATA = FRP14_16 MEAN MAXDEC = 2 N MISSING;
 CLASS DISTRICT_CODE DISTRICT_NAME;
 LABEL VAR22 = ELIGIBLE FRPM PERCENTAGE; 
@@ -135,13 +137,15 @@ title1
 title2
 "Rationale: This should help identify ethnicity impact for students in CA K-12 publich schools.So that we know if there is a correlationship between ethnicity and student fitness level."
 ;
-
+*IL: put semicolons on their own line when following long strings;
 footnote1
-"From the result, we can see that in general group 7, which is Hispanic, have more percent of students who are at a higher health risk.";
+"From the result, we can see that in general group 7, which is Hispanic, have more percent of students who are at a higher health risk."
+;
 
 footnote2
 "From the result, we can see that group 4, which is American Indian, in general have heathier students.";
 
+*IL: this should be near the top of the data-prep file;
 *
 Methodology: Use Proc means procedure and identify the variables to compare the values
 ;
@@ -160,20 +164,20 @@ VALUE Report_Number_Format
 Run; 
 
 PROC MEANS DATA = pft14_16 mean maxdec=2;
-		CLASS Report_Number; 
-		WHERE Report_Number in (3,4,5,6,7,8,9,10);
-		var perc5c perc7c perc9c;
-		LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
-		  Perc7c = 'percentage of Grade 7 students in high risk zone'
-		  Perc9c = 'percentage of Grade 9 students in high risk zone'
-		  ;
-		FORMAT Report_Number Report_Number_Format.;
+        CLASS Report_Number; 
+        WHERE Report_Number in (3,4,5,6,7,8,9,10);
+        var perc5c perc7c perc9c;
+        LABEL Perc5c = 'percentage of Grade 5 students in high risk zone'
+          Perc7c = 'percentage of Grade 7 students in high risk zone'
+          Perc9c = 'percentage of Grade 9 students in high risk zone'
+          ;
+        FORMAT Report_Number Report_Number_Format.;
 RUN;
 
 title;
 footnote;
 
-
+*IL: be careful to not include extra line breaks at the end of a file;
 
 
 
