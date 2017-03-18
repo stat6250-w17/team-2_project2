@@ -17,29 +17,28 @@ Dataset Name: PFT_analytic_dataset created in external file
 
 
 * environmental setup;
-let dataPrepFileName = STAT6250-01_w17-team-2_project2_data_preparation.sas;
-let sasUEFilePrefix = team-2_project2;
+%let dataPrepFileName = STAT6250-01_w17-team-2_project2_data_preparation.sas;
+%let sasUEFilePrefix = team-2_project2;
 
-
-* load external file that generates analytic dataset PFT_analytic_dataset
+* load external file that generates analytic dataset AS_PFT_analytic_datasetFINAL
 using a system path dependent on the host operating system, after setting the
 relative file import path to the current directory, if using Windows;
-macro setup;
-if
+%macro setup;
+%if
     &SYSSCP. = WIN
-then
-    do;
+%then
+    %do;
         X
-        'cd ''substr(sysget(SAS_EXECFILEPATH),1,eval(length(sysget(SAS_EXECFILEPATH))-length(sysget(SAS_EXECFILENAME))))'''
+        "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))"""
         ;           
-        include '.\&dataPrepFileName.';
-    end;
-else
-    do;
-        include '~/&sasUEFilePrefix./&dataPrepFileName.';
-    end;
-mend;
-setup
+        %include ".\&dataPrepFileName.";
+    %end;
+%else
+    %do;
+        %include "~/&sasUEFilePrefix./&dataPrepFileName.";
+    %end;
+%mend;
+%setup
 ;
 
 
