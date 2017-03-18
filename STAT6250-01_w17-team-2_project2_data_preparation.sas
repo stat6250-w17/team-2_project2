@@ -15,8 +15,8 @@ Creates analytic dataset : PFT_analytic_dataset
                         Statewide data files for the Physical Fitness Testing Program, 2014-2015
                       (Filtered for Alameda and Contra Costa County school districts
                        [District Codes : dcode
-			10017,31609,31617,61119,61127,61143,61150,61168,61176,61192,
-			61200,61234,61242,61259,61275,61291,61309,75093,75101,75119,76653])
+            10017,31609,31617,61119,61127,61143,61150,61168,61176,61192,
+            61200,61234,61242,61259,61275,61291,61309,75093,75101,75119,76653])
 
 [Experimental Unit Description] contain results from the Physical Fitness Test (PFT) program
 
@@ -39,8 +39,8 @@ Creates analytic dataset : PFT_analytic_dataset
 [Dataset Description] Physical Fitness Test (PFT) program results(2015-2016)
                       Statewide data files for the Physical Fitness Testing Program, 2015-2016
                       (Filtered for Alameda and Contra Costa County school districts[District Codes : dcode
-			10017,31609,31617,61119,61127,61143,61150,61168,61176,61192,
-			61200,61234,61242,61259,61275,61291,61309,75093,75101,75119,76653])
+            10017,31609,31617,61119,61127,61143,61150,61168,61176,61192,
+            61200,61234,61242,61259,61275,61291,61309,75093,75101,75119,76653])
 
 [Experimental Unit Description] contain results from the Physical Fitness Test (PFT) program
 
@@ -103,8 +103,8 @@ Creates analytic dataset : PFT_analytic_dataset
 [Dataset 5 Name] FRPM_14_15
 
 [Dataset Description] an unduplicated count of students who are FRPM eligible. This count includes:
-			- Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools and
-			- Students who are automatically eligible for free meals based on their foster, migrant, or homeless status, or because they were "directly certified" as being eligible for free meals based on their participation in California's food stamp program.
+            - Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools and
+            - Students who are automatically eligible for free meals based on their foster, migrant, or homeless status, or because they were "directly certified" as being eligible for free meals based on their participation in California's food stamp program.
 
 [Experimental Unit Description] an unduplicated count of students who are FRPM eligible per school
 
@@ -124,8 +124,8 @@ Creates analytic dataset : PFT_analytic_dataset
 [Dataset 6 Name] FRPM_15_16
 
 [Dataset Description] an unduplicated count of students who are FRPM eligible. This count includes:
-			- Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools and
-			- Students who are automatically eligible for free meals based on their foster, migrant, or homeless status, or because they were "directly certified" as being eligible for free meals based on their participation in California's food stamp program.
+            - Students who are eligible to receive Free or Reduced Price Meals (FRPM) based on applying for the National School Lunch Program (NSLP), or who are determined to meet the same income eligibility criteria as the NSLP, through their local schools and
+            - Students who are automatically eligible for free meals based on their foster, migrant, or homeless status, or because they were "directly certified" as being eligible for free meals based on their participation in California's food stamp program.
 
 [Experimental Unit Description] an unduplicated count of students who are FRPM eligible per school
 
@@ -156,10 +156,10 @@ proc http
 run;
 
 proc import FILE=PFT14_15
-	OUT= WORK.PFT14_15
-	DBMS=xls
-	REPLACE;
-	GETNAMES=YES;
+    OUT= WORK.PFT14_15
+    DBMS=xls
+    REPLACE;
+    GETNAMES=YES;
 ;
 RUN;
 
@@ -177,10 +177,10 @@ proc http
 run;
 
 proc import FILE=PFT15_16
-	OUT= WORK.PFT15_16
-	DBMS=xls
-	REPLACE;
-	GETNAMES=YES;
+    OUT= WORK.PFT15_16
+    DBMS=xls
+    REPLACE;
+    GETNAMES=YES;
 ;
 RUN;
 
@@ -197,10 +197,10 @@ run;
 
 
 proc import FILE=Ent15_16
-	OUT= WORK.Entities_2015_16
-	DBMS=xls
-	REPLACE;
-	GETNAMES=YES;
+    OUT= WORK.Entities_2015_16
+    DBMS=xls
+    REPLACE;
+    GETNAMES=YES;
 ;
 RUN;
 
@@ -216,10 +216,10 @@ proc http
 run;
 
 proc import FILE=Sub14_15
-	OUT= WORK.Subgroup_2014_15
-	DBMS=xls
-	REPLACE;
-	GETNAMES=YES;
+    OUT= WORK.Subgroup_2014_15
+    DBMS=xls
+    REPLACE;
+    GETNAMES=YES;
 ;
 RUN;
 
@@ -235,10 +235,10 @@ proc http
 run;
 
 proc import FILE=FRP14_15
-	OUT= WORK.FRP14_15
-	DBMS=xls
-	REPLACE;
-	GETNAMES=YES;
+    OUT= WORK.FRP14_15
+    DBMS=xls
+    REPLACE;
+    GETNAMES=YES;
 ;
 RUN;
 
@@ -255,10 +255,10 @@ proc http
 run;
 
 proc import FILE=FRP15_16
-	OUT= WORK.FRP15_16
-	DBMS=xls
-	REPLACE;
-	GETNAMES=YES;
+    OUT= WORK.FRP15_16
+    DBMS=xls
+    REPLACE;
+    GETNAMES=YES;
 ;
 RUN;
 *====================================================================
@@ -268,14 +268,14 @@ End of import of xls
 /* Proc Format Statement */
 proc format;
     value Report_Number_Format
-	    3 = 'African Americans' 
-	    4 = 'American Indian'
-	    5 = 'Asians'
-	    6 = 'Filipino'
-	    7 = 'Hispanic'
-	    8 = 'Native Hawaiian'
-	    9 = 'White'
-	    10 = 'Two or more races'
+        3 = 'African Americans' 
+        4 = 'American Indian'
+        5 = 'Asians'
+        6 = 'Filipino'
+        7 = 'Hispanic'
+        8 = 'Native Hawaiian'
+        9 = 'White'
+        10 = 'Two or more races'
     ;
 
 run;
@@ -295,13 +295,17 @@ data PFT14_16;
 
 /*Combine the FRPM 2014-15 and 2015-16 data into a single FRP14_16 dataset */
 data FRP14_16;
-	set FRP14_15(IN=in1415 )
-            FRP15_16(IN=in1516 );
+    retain school_name;
+    length school_name $100;
+    set FRP14_15(IN=in1415 rename=(school_name=school_name_1))
+            FRP15_16(IN=in1516 rename=(school_name=school_name_2));
     /* Change datatype of county, district and school code 
        so they are consistent with PFT and FRPM datasets*/
     ccode = input(County_code,2.)  ; 
     dcode = input(District_code,2.);
     scode = input(School_code,2.)  ;
+    if in1415=1 then school_name=school_name_1;
+    if in1516=1 then school_name=school_name_2;
 
 *==============================================================================
 * The final analytics dataset combines PFT14_16 dataset with the Entities, 
@@ -331,7 +335,7 @@ data PFT_analytic_dataset1; /*temp dataset to hold PFT + Entities data*/
    by the CountyCode + DistrictCode + SchoolCode which defines each 'Entity'*/
 
 proc sort data=PFT_analytic_dataset1;
-	by Level_Number Report_Number Table_Number Line_Number
+    by Level_Number Report_Number Table_Number Line_Number
 ;
 
 proc sort data = Subgroup_2014_15;

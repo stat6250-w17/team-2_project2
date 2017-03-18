@@ -11,7 +11,7 @@ districts
 Dataset Name: PFT_analytic_dataset created in external file
               STAT6250-01_w17-team-2_project2_data_preparation.sas, which is 
               assumed to be in the same directory as this file.
-	      See included file for dataset properties.
+          See included file for dataset properties.
 ;
 
 
@@ -49,17 +49,17 @@ title1
   
 title2
 'Rationale: This will help identify which of the six areas is typically challenging for the student population. 
-				 - Aerobic Capacity
+                 - Aerobic Capacity
                                  - Body Composition                   
                                  - Abdominal Strength                 
                                  - Trunk Extension Strength           
                                  - Upper Body Strength                
                                  - Flexibility
-				Grade 5,7 and 9 students who are tested are categorized as healthy(PercNa), needs improvement(PercNb) and high risk(PercNc).
+                Grade 5,7 and 9 students who are tested are categorized as healthy(PercNa), needs improvement(PercNb) and high risk(PercNc).
                                 PE programs can be fine tuned if this analysis reveals that students consistently perform below average in any one of these
                                 areas.';
 *Methodology: This will avg columns Perc5a,Perc5b,Perc5c, Perc7a,Perc7b,Perc7c,Perc9a,Perc9b,Perc9c for all the schools. 
-			     Use Report_Number = 0 ;
+                 Use Report_Number = 0 ;
 
 *-----------------------------------------------------------------------------;
 footnote
@@ -68,7 +68,7 @@ footnote
 ;
 
 proc sql;
-	select ccode, dcode, level_number, report_number, table_number, line_text,
+    select ccode, dcode, level_number, report_number, table_number, line_text,
                avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
                avg(Perc5b) as Grade5_Needs_Improvement_Zone  format decimal8.2, 
                avg(Perc5c) as Grade5_At_Risk_Zone            format decimal8.2, 
@@ -78,7 +78,7 @@ proc sql;
                avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format decimal8.2, 
                avg(Perc9b) as Grade9_Needs_Improvement_Zone  format decimal8.2, 
                avg(Perc9c) as Grade9_At_Risk_Zone            format decimal8.2
-	  from pft_analytic_dataset
+      from pft_analytic_dataset
          where Level_number  = 1 /* indicates school level     */
            and report_number = 0 /* indicates for all students */
            and table_number  = 1 /* indicates Fitness area */
@@ -116,7 +116,7 @@ footnote
 
 
 proc sql;
-	select ccode, dcode, level_number, report_number, table_number, line_text,
+    select ccode, dcode, level_number, report_number, table_number, line_text,
                avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
                avg(Perc5b) as Grade5_Needs_Improvement_Zone  format decimal8.2, 
                avg(Perc5c) as Grade5_At_Risk_Zone            format decimal8.2, 
@@ -126,7 +126,7 @@ proc sql;
                avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format decimal8.2, 
                avg(Perc9b) as Grade9_Needs_Improvement_Zone  format decimal8.2, 
                avg(Perc9c) as Grade9_At_Risk_Zone            format decimal8.2
-	  from pft_analytic_dataset
+      from pft_analytic_dataset
          where Level_number  = 1  /* indicates school level  */
            and report_number = 14 /* indicates Gender summary */
            and table_number  = 3  /* indicates gender summary */
@@ -162,9 +162,9 @@ footnote
  identify causes."
 ;
 
-
+*IL: these should be something like best12.2 or comma12.2;
 proc sql;
-	select ccode, dcode, level_number, report_number, table_number, line_text,
+    select ccode, dcode, level_number, report_number, table_number, line_text,
                avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
                avg(Perc5b) as Grade5_Needs_Improvement_Zone  format decimal8.2, 
                avg(Perc5c) as Grade5_At_Risk_Zone            format decimal8.2, 
@@ -174,7 +174,7 @@ proc sql;
                avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format decimal8.2, 
                avg(Perc9b) as Grade9_Needs_Improvement_Zone  format decimal8.2, 
                avg(Perc9c) as Grade9_At_Risk_Zone            format decimal8.2
-	  from pft_analytic_dataset
+      from pft_analytic_dataset
          where Level_number  = 2  /* indicates district level  */
            and report_number = 16 /* indicates Economic Status summary */
            and table_number  = 5  /* indicates gender summary */
