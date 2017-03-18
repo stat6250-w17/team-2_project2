@@ -69,15 +69,15 @@ footnote
 
 proc sql;
 	select ccode, dcode, level_number, report_number, table_number, line_text,
-               avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc5b) as Grade5_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc5c) as Grade5_At_Risk_Zone            format decimal8.2, 
-               avg(Perc7a) as Grade7_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc7b) as Grade7_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc7c) as Grade7_At_Risk_Zone            format decimal8.2, 
-               avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc9b) as Grade9_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc9c) as Grade9_At_Risk_Zone            format decimal8.2
+               avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc5b) as Grade5_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc5c) as Grade5_At_Risk_Zone            format best12.2, 
+               avg(Perc7a) as Grade7_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc7b) as Grade7_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc7c) as Grade7_At_Risk_Zone            format best12.2, 
+               avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc9b) as Grade9_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc9c) as Grade9_At_Risk_Zone            format best12.2
 	  from pft_analytic_dataset
          where Level_number  = 1 /* indicates school level     */
            and report_number = 0 /* indicates for all students */
@@ -117,15 +117,15 @@ footnote
 
 proc sql;
 	select ccode, dcode, level_number, report_number, table_number, line_text,
-               avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc5b) as Grade5_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc5c) as Grade5_At_Risk_Zone            format decimal8.2, 
-               avg(Perc7a) as Grade7_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc7b) as Grade7_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc7c) as Grade7_At_Risk_Zone            format decimal8.2, 
-               avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc9b) as Grade9_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc9c) as Grade9_At_Risk_Zone            format decimal8.2
+               avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc5b) as Grade5_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc5c) as Grade5_At_Risk_Zone            format best12.2, 
+               avg(Perc7a) as Grade7_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc7b) as Grade7_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc7c) as Grade7_At_Risk_Zone            format best12.2, 
+               avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc9b) as Grade9_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc9c) as Grade9_At_Risk_Zone            format best12.2
 	  from pft_analytic_dataset
          where Level_number  = 1  /* indicates school level  */
            and report_number = 14 /* indicates Gender summary */
@@ -165,15 +165,15 @@ footnote
 
 proc sql;
 	select ccode, dcode, level_number, report_number, table_number, line_text,
-               avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc5b) as Grade5_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc5c) as Grade5_At_Risk_Zone            format decimal8.2, 
-               avg(Perc7a) as Grade7_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc7b) as Grade7_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc7c) as Grade7_At_Risk_Zone            format decimal8.2, 
-               avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format decimal8.2, 
-               avg(Perc9b) as Grade9_Needs_Improvement_Zone  format decimal8.2, 
-               avg(Perc9c) as Grade9_At_Risk_Zone            format decimal8.2
+               avg(Perc5a) as Grade5_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc5b) as Grade5_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc5c) as Grade5_At_Risk_Zone            format best12.2, 
+               avg(Perc7a) as Grade7_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc7b) as Grade7_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc7c) as Grade7_At_Risk_Zone            format best12.2, 
+               avg(Perc9a) as Grade9_Healthy_Fitness_Zone    format best12.2, 
+               avg(Perc9b) as Grade9_Needs_Improvement_Zone  format best12.2, 
+               avg(Perc9c) as Grade9_At_Risk_Zone            format best12.2
 	  from pft_analytic_dataset
          where Level_number  = 2  /* indicates district level  */
            and report_number = 16 /* indicates Economic Status summary */

@@ -295,13 +295,18 @@ data PFT14_16;
 
 /*Combine the FRPM 2014-15 and 2015-16 data into a single FRP14_16 dataset */
 data FRP14_16;
-	set FRP14_15(IN=in1415 )
-            FRP15_16(IN=in1516 );
+        retain school_name;
+        length school_name $100;
+	set FRP14_15(IN=in1415 rename=(school_name = school_name_1))
+            FRP15_16(IN=in1516 rename=(school_name = school_name_2));
     /* Change datatype of county, district and school code 
        so they are consistent with PFT and FRPM datasets*/
     ccode = input(County_code,2.)  ; 
     dcode = input(District_code,2.);
     scode = input(School_code,2.)  ;
+    if in1415=1 then school_name=school_name_1;
+    if in1516=1 then school_name=school_name_2;
+
 
 *==============================================================================
 * The final analytics dataset combines PFT14_16 dataset with the Entities, 
